@@ -73,7 +73,7 @@
       col1.attr("id","workHour");
       col1.attr("value",i)
       col1.text(workTime[i][0]);
-      var col2 = $("<div>");
+      var col2 = $("<input>");
       //aplying a class to format if the hour already pass or is in the future with gray (past) red (present) or green (future)
       if(currentHour>(i+8)){
         col2.attr("class","col-8 past");
@@ -84,7 +84,7 @@
       }
       col1.attr("id","workTask");
       var col3 = $("<div>");
-      col3.attr("class","col-2 saveBtn");
+      col3.attr("class","col-2 saveBtn far fa-save fa-3x");
       col1.attr("id","save");
       row.append(col1, col2, col3);
       $(".container").append(row)
