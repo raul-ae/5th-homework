@@ -34,5 +34,64 @@
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <!-- adding a reference for Moment.js to be executed at the browser -->
+    <script src="moment.js"></script>
+  <script>
+    // adding a date in the #currentDate id     
+      var date = moment().format('dddd, MMMM Do YYYY');
+      $("#currentDay").text(date)
+      console.log(date);
+    // Creating an object with the working time slots
+    var workTime = [
+      ["8 AM", ""],
+      ["9 AM", ""],
+      ["10 AM", ""],
+      ["11 AM", ""],
+      ["12 PM", ""],
+      ["1 PM", ""],
+      ["2 PM", ""],
+      ["3 PM", ""],
+      ["4 PM", ""],
+      ["5 PM", ""],
+    ];
+    
+    //defining a variable with the current hour in 24hrs format from current time to compare and be able to define if the hour already passed.
+    if (moment().format("a")=="pm" && moment().format("h")!=12){
+      var currentHour = parseInt(moment().format("h"))+12;
+    } else{
+      var currentHour = parseInt(moment().format("h"));
+    }
+    currentHour=12
+
+    //creating the planer slots in the HTML file for the workTime object
+    console.log("current hour "+currentHour)
+    for (let i=0; i<workTime.length; i++){
+      var row = $("<div>");
+      row.attr("class", "row")
+      var col1 = $("<div>");
+      col1.attr("class","col-2 hour time-block");
+      col1.attr("id","workHour");
+      col1.attr("value",i)
+      col1.text(workTime[i][0]);
+      var col2 = $("<div>");
+      //aplying a class to format if the hour already pass or is in the future with gray (past) red (present) or green (future)
+      if(currentHour>(i+8)){
+        col2.attr("class","col-8 past");
+      } else if(currentHour==(i+8)){
+        col2.attr("class","col-8 present");
+      } else {
+        col2.attr("class","col-8 future");
+      }
+      col1.attr("id","workTask");
+      var col3 = $("<div>");
+      col3.attr("class","col-2 saveBtn");
+      col1.attr("id","save");
+      row.append(col1, col2, col3);
+      $(".container").append(row)
+      
+      console.log(i)
+    }
+    console.log(workTime)
+  </script>
   </body>
 </html>
