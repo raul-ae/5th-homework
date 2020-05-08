@@ -61,7 +61,7 @@
     } else{
       var currentHour = parseInt(moment().format("h"));
     }
-    currentHour=12
+    //currentHour=12
 
     //creating the planer slots in the HTML file for the workTime object
     console.log("current hour "+currentHour)
@@ -100,9 +100,16 @@
       var input = "#workTask"+index;
       var task = $(input).val();
       workTime[index][1]= task;
+      localStorage.setItem(index, task)
       console.log(workTime)
     });
-    
+
+    function get(){
+    for (let i=0; i<10 ;i++){
+      $("#workTask"+i).val(localStorage.getItem(i))
+    };
+    }
+    get();
   </script>
   </body>
 </html>
