@@ -71,7 +71,6 @@
       var col1 = $("<div>");
       col1.attr("class","col-2 hour time-block");
       col1.attr("id","workHour");
-      col1.attr("value",i)
       col1.text(workTime[i][0]);
       var col2 = $("<input>");
       //aplying a class to format if the hour already pass or is in the future with gray (past) red (present) or green (future)
@@ -82,16 +81,28 @@
       } else {
         col2.attr("class","col-8 future");
       }
-      col1.attr("id","workTask");
+      col2.attr("id","workTask"+i);
       var col3 = $("<div>");
-      col3.attr("class","col-2 saveBtn far fa-save fa-3x");
-      col1.attr("id","save");
+      col3.attr("class","col-2");
+      col3.attr("id","save");
+      var saveButton = $("<button>");
+      saveButton.attr("class","far fa-save fa-3x saveBtn");
+      saveButton.attr("value",i);
+      col3.append(saveButton);
       row.append(col1, col2, col3);
       $(".container").append(row)
       
       console.log(i)
     }
-    console.log(workTime)
+
+    $("button").on("click", function() {
+      var index = $(this).attr("value");
+      var input = "#workTask"+index;
+      var task = $(input).val();
+      workTime[index][1]= task;
+      console.log(workTime)
+    });
+    
   </script>
   </body>
 </html>
